@@ -6,4 +6,6 @@
    
    <import>war:/push-notifications-extension/jcr/jcr-configuration.xml</import>
    
+   <import>war:/push-notifications-extension/social/social-push-notifications-configuration.xml</import>
+   
 </configuration>

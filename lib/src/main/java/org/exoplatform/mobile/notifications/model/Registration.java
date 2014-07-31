@@ -1,13 +1,15 @@
 package org.exoplatform.mobile.notifications.model;
 
 public class Registration {
+	
+	public final static String PLATFORM_TYPE_ANDROID = "android";
+	public final static String PLATFORM_TYPE_IOS = "ios";
 
 	public String id;
 	public String platform;
 	public String username;
 	
-	public Registration()
-	{
+	public Registration() {
 		id = "";
 		platform = "";
 		username = "";
@@ -16,8 +18,11 @@ public class Registration {
 	public Registration(String _id, String _plf, String _usr)
 	{
 		id = (_id == null ? "" : _id);
-		platform = (_plf == null ? "" : _plf);
 		username = (_usr == null ? "" : _usr);
+		
+		if ("android".equalsIgnoreCase(_plf) || "ios".equalsIgnoreCase(_plf)) platform = _plf.toLowerCase();
+		else throw new RuntimeException("Incorrect platform "+_plf);
+		
 	}
 
 	public String getId() {
@@ -25,7 +30,7 @@ public class Registration {
 	}
 
 	public void setId(String id) {
-		this.id = (id == null ? "" : id);
+		this.id = id;
 	}
 
 	public String getPlatform() {
@@ -33,7 +38,7 @@ public class Registration {
 	}
 
 	public void setPlatform(String platform) {
-		this.platform = (platform == null ? "" : platform);
+		this.platform = platform;
 	}
 
 	public String getUsername() {
@@ -41,7 +46,7 @@ public class Registration {
 	}
 
 	public void setUsername(String username) {
-		this.username = (username == null ? "" : username);
+		this.username = username;
 	}
 
 	@Override

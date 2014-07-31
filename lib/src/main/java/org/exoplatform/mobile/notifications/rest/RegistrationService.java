@@ -47,7 +47,7 @@ public class RegistrationService implements ResourceContainer  {
 	    		if (StorageUtils.getService(RegistrationJCRDataStorage.class).registerDevice(registration))
 	    		{
 					jsonReg.put("device_id", registration.id);
-					jsonReg.put("platform" , registration.platform);
+					jsonReg.put("platform" , registration.platform.toString());
 					jsonReg.put("username" , registration.username);
 	    		}
 	    		else

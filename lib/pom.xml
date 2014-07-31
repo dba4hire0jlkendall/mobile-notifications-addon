@@ -73,5 +73,21 @@
         <artifactId>jcr</artifactId>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.relayrides</groupId>
+    	<artifactId>pushy</artifactId>
+    	<version>0.3</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.httpcomponents</groupId>
+    	<artifactId>httpclient</artifactId>
+    	<version>4.1.2</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.exoplatform.social</groupId>
+    	<artifactId>social-component-core</artifactId>
+    	<scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>

@@ -6,10 +6,22 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_1.xsd">
    
     <component>
-        <type>org.exoplatform.notifications.rest.service.RegistrationService</type>
+        <type>org.exoplatform.mobile.notifications.rest.RegistrationService</type>
     </component>
     
     <component>
-        <type>org.exoplatform.notifications.storage.RegistrationJCRDataStorage</type>
+        <type>org.exoplatform.mobile.notifications.storage.RegistrationJCRDataStorage</type>
     </component>
+    
+    <component>
+        <type>org.exoplatform.mobile.notifications.provider.MobileNotificationService</type>
+    </component>
+    
+    <component>
+        <type>org.exoplatform.mobile.notifications.provider.GoogleCloudMessagingProvider</type>
+    </component>
+    
+    <!-- component>
+        <type>org.exoplatform.mobile.notifications.provider.ApplePushNotificationProvider</type>
+    </component  -->
 </configuration>
