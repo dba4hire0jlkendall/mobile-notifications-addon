@@ -8,7 +8,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.notifications.model.Device;
+import org.exoplatform.notifications.model.Registration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -30,22 +30,22 @@ public class RegistrationJCRDataStorage {
 	 * @param device The details of the device to register
 	 * @return true if the device was registered, false otherwise
 	 */
-	public boolean registerDeviceWithUsername(String username, Device device)
+	public boolean registerDevice(Registration reg)
 	{
-		if (getDevicesOfUsername(username).contains(device)) {
+		if (getRegistrationsOfUsername(reg.username).contains(reg)) {
 			// return true if the device is already registered
 			return true;
 		}
 		
-		Node userNode = getUserRootNode(username);
+		Node userNode = getUserRootNode(reg.username);
 		
 		if (userNode != null) {
 			
 			try {
-				Node registration = userNode.addNode(device.id, StorageUtils.REGISTRATION_NODE_TYPE);
-				registration.setProperty(StorageUtils.REGISTRATION_PROP_ID, device.id);
-				registration.setProperty(StorageUtils.REGISTRATION_PROP_PLATFORM, device.platform);
-				registration.setProperty(StorageUtils.REGISTRATION_PROP_USERNAME, username);
+				Node registration = userNode.addNode(reg.id, StorageUtils.REGISTRATION_NODE_TYPE);
+				registration.setProperty(StorageUtils.REGISTRATION_PROP_ID, reg.id);
+				registration.setProperty(StorageUtils.REGISTRATION_PROP_PLATFORM, reg.platform);
+				registration.setProperty(StorageUtils.REGISTRATION_PROP_USERNAME, reg.username);
 				userNode.save();
 				return true; // saves the Device info in JCR and returns true
 			} catch (Exception e) {
@@ -61,22 +61,24 @@ public class RegistrationJCRDataStorage {
 	 * @param username
 	 * @return An ArrayList of Device objects registered by the user, or an empty ArrayList
 	 */
-	public List<Device> getDevicesOfUsername(String username)
+	public List<Registration> getRegistrationsOfUsername(String username)
 	{
-		ArrayList<Device> results = new ArrayList<Device>(5);
+		ArrayList<Registration> results = new ArrayList<Registration>(5);
 		Node userNode = getUserRootNode(username);
 		try {
 			NodeIterator it = userNode.getNodes();
 			while (it.hasNext()) {
 				// Each Node under the user's node represents a registered device 
 				Node node = it.nextNode();
-				Device dev = new Device(node.getProperty(StorageUtils.REGISTRATION_PROP_ID).getValue().getString(),
-						                node.getProperty(StorageUtils.REGISTRATION_PROP_PLATFORM).getValue().getString());
-				results.add(dev);
+				Registration reg = new Registration(
+						node.getProperty(StorageUtils.REGISTRATION_PROP_ID).getValue().getString(),
+						node.getProperty(StorageUtils.REGISTRATION_PROP_PLATFORM).getValue().getString(),
+						node.getProperty(StorageUtils.REGISTRATION_PROP_USERNAME).getValue().getString());
+				results.add(reg);
 			}
 		} catch (RepositoryException e) {
 			e.printStackTrace();
-			results = new ArrayList<Device>(0); // The result ArrayList is emptied in case an error occurred in the try block
+			results = new ArrayList<Registration>(0); // The result ArrayList is emptied in case an error occurred in the try block
 		}
 		return results;
 	}
