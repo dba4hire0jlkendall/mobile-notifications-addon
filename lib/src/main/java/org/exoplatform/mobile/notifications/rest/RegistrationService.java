@@ -1,4 +1,4 @@
-package org.exoplatform.notifications.rest.service;
+package org.exoplatform.mobile.notifications.rest;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 
-import org.exoplatform.notifications.model.Registration;
-import org.exoplatform.notifications.storage.RegistrationJCRDataStorage;
-import org.exoplatform.notifications.storage.StorageUtils;
+import org.exoplatform.mobile.notifications.model.Registration;
+import org.exoplatform.mobile.notifications.storage.RegistrationJCRDataStorage;
+import org.exoplatform.mobile.notifications.storage.StorageUtils;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package org.exoplatform.notifications.storage;
+package org.exoplatform.mobile.notifications.storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.notifications.model.Registration;
+import org.exoplatform.mobile.notifications.model.Registration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;

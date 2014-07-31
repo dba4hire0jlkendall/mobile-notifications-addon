@@ -1,4 +1,4 @@
-package org.exoplatform.notifications.rest.service;
+package org.exoplatform.mobile.notifications.rest;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;

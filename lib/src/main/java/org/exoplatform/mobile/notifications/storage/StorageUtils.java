@@ -1,4 +1,4 @@
-package org.exoplatform.notifications.storage;
+package org.exoplatform.mobile.notifications.storage;
 
 
 

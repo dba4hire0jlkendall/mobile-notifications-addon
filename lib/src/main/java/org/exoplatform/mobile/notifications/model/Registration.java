@@ -1,4 +1,4 @@
-package org.exoplatform.notifications.model;
+package org.exoplatform.mobile.notifications.model;
 
 public class Registration {
 
