@@ -51,6 +51,7 @@ public class GoogleCloudMessagingProvider implements MobileNotificationProvider 
 			ids.put(recipient);
 			jsonBody.put("registration_ids", ids);
 			JSONObject jsonData = new JSONObject();
+			jsonData.put("user", notif.targetUser);
 			jsonData.put("title", notif.eventTitle);
 			jsonData.put("message", notif.eventMessage);
 			jsonBody.put("data", jsonData);
