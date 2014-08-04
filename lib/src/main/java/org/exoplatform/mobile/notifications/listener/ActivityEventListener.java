@@ -1,25 +1,35 @@
 package org.exoplatform.mobile.notifications.listener;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.mobile.notifications.model.MobileNotification;
-import org.exoplatform.mobile.notifications.provider.MobileNotificationService;
+import org.exoplatform.mobile.notifications.utils.Utils;
 import org.exoplatform.social.core.activity.ActivityLifeCycleEvent;
 import org.exoplatform.social.core.activity.ActivityListenerPlugin;
+import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.model.Identity;
 
 public class ActivityEventListener extends ActivityListenerPlugin {
 
 	@Override
 	public void likeActivity(ActivityLifeCycleEvent event) {
 		
-//		ExoSocialActivity activity = event.getSource();
+		ExoSocialActivity activity = event.getActivity();
 		
-		MobileNotification notif = new MobileNotification();
-		notif.targetUser = "root";
-		notif.eventTitle = "Someone liked your activity.";
-		notif.eventMessage = "";
+		String[] likersIdentityIds = activity.getLikeIdentityIds();
+		String likerIdentityId = likersIdentityIds[likersIdentityIds.length - 1];
+	    String likerUser = Utils.getUserId(likerIdentityId);
+	    String posterUser = Utils.getUserId(activity.getPosterId()); 
+	    
+	    if (!likerUser.equals(posterUser)) { // only send notification if liker != poster
 		
-		getNotificationService().processNotification(notif);
+	    	Identity likerIdentity = Utils.getIdentityManager().getIdentity(likerIdentityId, true);
+	    	
+			MobileNotification notif = new MobileNotification();
+			notif.targetUser = posterUser;
+			notif.eventTitle = likerIdentity.getProfile().getFullName()+" liked your activity.";
+			notif.eventMessage = activity.getTitle();
+			
+			Utils.getNotificationService().processNotification(notif);
+	    }
 		
 	}
 
@@ -39,12 +49,6 @@ public class ActivityEventListener extends ActivityListenerPlugin {
 	public void updateActivity(ActivityLifeCycleEvent event) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	private MobileNotificationService getNotificationService()
-	{
-		ExoContainer container = ExoContainerContext.getCurrentContainer();
-		return (MobileNotificationService)container.getComponentInstanceOfType(MobileNotificationService.class);
 	}
 
 }
