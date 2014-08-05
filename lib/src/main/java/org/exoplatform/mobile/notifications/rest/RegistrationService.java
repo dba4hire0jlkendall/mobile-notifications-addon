@@ -46,7 +46,7 @@ public class RegistrationService implements ResourceContainer  {
 	    		
 	    		if (StorageUtils.getService(RegistrationJCRDataStorage.class).registerDevice(registration))
 	    		{
-					jsonReg.put("device_id", registration.id);
+					jsonReg.put("device_id", registration.device_id);
 					jsonReg.put("platform" , registration.platform.toString());
 					jsonReg.put("username" , registration.username);
 	    		}
@@ -54,7 +54,6 @@ public class RegistrationService implements ResourceContainer  {
 	    		{
 	    			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Registration failed.").build();
 	    		}
-				
 				
 			} catch (JSONException e) {
 				return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Device registered successfully but cannot create response.").build();

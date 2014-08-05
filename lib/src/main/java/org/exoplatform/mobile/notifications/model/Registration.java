@@ -5,32 +5,32 @@ public class Registration {
 	public final static String PLATFORM_TYPE_ANDROID = "android";
 	public final static String PLATFORM_TYPE_IOS = "ios";
 
-	public String id;
+	public String device_id;
 	public String platform;
 	public String username;
 	
 	public Registration() {
-		id = "";
+		device_id = "";
 		platform = "";
 		username = "";
 	}
 	
-	public Registration(String _id, String _plf, String _usr)
+	public Registration(String id, String plf, String usr)
 	{
-		id = (_id == null ? "" : _id);
-		username = (_usr == null ? "" : _usr);
+		device_id = (id == null ? "" : id);
+		username = (usr == null ? "" : usr);
 		
-		if ("android".equalsIgnoreCase(_plf) || "ios".equalsIgnoreCase(_plf)) platform = _plf.toLowerCase();
-		else throw new RuntimeException("Incorrect platform "+_plf);
+		if ("android".equalsIgnoreCase(plf) || "ios".equalsIgnoreCase(plf)) platform = plf.toLowerCase();
+		else throw new RuntimeException("Incorrect platform "+plf);
 		
 	}
 
-	public String getId() {
-		return id;
+	public String getDevice_id() {
+		return device_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setDevice_id(String id) {
+		this.device_id = id;
 	}
 
 	public String getPlatform() {
@@ -51,13 +51,13 @@ public class Registration {
 
 	@Override
 	public String toString() {
-		return "Registration { 'id' : '"+id+"' , 'platform' : '"+platform+"' , 'username' : '"+username+"' }";
+		return "Registration { 'deviceId' : '"+device_id+"' , 'platform' : '"+platform+"' , 'username' : '"+username+"' }";
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		Registration other = (Registration)obj;
-		return this.id.equals(other.id) && this.platform.equals(other.platform) && this.username.equals(other.username);
+		return this.device_id.equals(other.device_id) && this.platform.equals(other.platform) && this.username.equals(other.username);
 	}
 	
 	

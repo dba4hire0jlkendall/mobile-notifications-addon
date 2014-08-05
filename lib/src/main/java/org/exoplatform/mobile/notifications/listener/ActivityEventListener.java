@@ -25,7 +25,7 @@ public class ActivityEventListener extends ActivityListenerPlugin {
 	    	
 			MobileNotification notif = new MobileNotification();
 			notif.targetUser = posterUser;
-			notif.eventTitle = likerIdentity.getProfile().getFullName()+" liked your activity.";
+			notif.eventTitle = likerIdentity.getProfile().getFullName()+" liked your activity";
 			notif.eventMessage = activity.getTitle();
 			
 			Utils.getNotificationService().processNotification(notif);

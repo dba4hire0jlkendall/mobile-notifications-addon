@@ -42,8 +42,8 @@ public class RegistrationJCRDataStorage {
 		if (userNode != null) {
 			
 			try {
-				Node registration = userNode.addNode(reg.id, StorageUtils.REGISTRATION_NODE_TYPE);
-				registration.setProperty(StorageUtils.REGISTRATION_PROP_ID, reg.id);
+				Node registration = userNode.addNode(reg.device_id, StorageUtils.REGISTRATION_NODE_TYPE);
+				registration.setProperty(StorageUtils.REGISTRATION_PROP_ID, reg.device_id);
 				registration.setProperty(StorageUtils.REGISTRATION_PROP_PLATFORM, reg.platform.toString());
 				registration.setProperty(StorageUtils.REGISTRATION_PROP_USERNAME, reg.username);
 				userNode.save();

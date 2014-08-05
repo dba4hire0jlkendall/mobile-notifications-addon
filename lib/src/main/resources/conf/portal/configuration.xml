@@ -21,7 +21,7 @@
         <type>org.exoplatform.mobile.notifications.provider.GoogleCloudMessagingProvider</type>
     </component>
     
-    <!-- component>
+    <component>
         <type>org.exoplatform.mobile.notifications.provider.ApplePushNotificationProvider</type>
-    </component  -->
+    </component>
 </configuration>

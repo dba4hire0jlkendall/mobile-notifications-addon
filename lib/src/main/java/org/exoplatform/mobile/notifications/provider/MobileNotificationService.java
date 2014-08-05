@@ -10,11 +10,13 @@ public class MobileNotificationService  {
 	
 	private RegistrationService registrationService;
 	private GoogleCloudMessagingProvider gcmProvider;
+	private ApplePushNotificationProvider apnProvider;
 	
-	public MobileNotificationService(RegistrationService service, GoogleCloudMessagingProvider gcmProv)
+	public MobileNotificationService(RegistrationService service, GoogleCloudMessagingProvider gcmProv, ApplePushNotificationProvider apnProv)
 	{
 		registrationService = service;
 		gcmProvider = gcmProv;
+		apnProvider = apnProv;
 	}
 	
 	public void processNotification(MobileNotification notif)
@@ -26,11 +28,11 @@ public class MobileNotificationService  {
 			Registration reg = it.next();
 			if (Registration.PLATFORM_TYPE_ANDROID.equalsIgnoreCase(reg.platform))
 			{
-				gcmProvider.sendNotificationTo(notif, reg.id);
+				gcmProvider.sendNotificationTo(notif, reg.device_id);
 			}
 			else if (Registration.PLATFORM_TYPE_IOS.equalsIgnoreCase(reg.platform))
 			{
-				// TODO send notification on ios
+				apnProvider.sendNotificationTo(notif, reg.device_id);
 			}
 		}
 	}
