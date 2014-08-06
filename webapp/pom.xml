@@ -32,4 +32,26 @@
   <packaging>war</packaging>
   <name>eXo Mobile Notifications Addon - Webapp</name>
   <description>eXo Mobile Notifications Addon - A portlet or any webapp</description>
+  <dependencies>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  	<dependency>
+  		<groupId>org.juzu</groupId>
+  		<artifactId>juzu-core</artifactId>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+      <groupId>org.juzu</groupId>
+      <artifactId>juzu-plugins-portlet</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.juzu</groupId>
+      <artifactId>juzu-bom-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>
