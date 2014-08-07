@@ -1,15 +1,17 @@
 package org.exoplatform.mobile.notifications.utils;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.mobile.notifications.model.NotificationType;
 import org.exoplatform.mobile.notifications.provider.MobileNotificationService;
+import org.exoplatform.mobile.notifications.settings.MobileNotificationSettings;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class Utils {
 
 	public static boolean userHasSubscribedToNotifications(String user, int notificationType) {
-		// TODO Check here if user has subscribed to notificationType in his settings
-		return true;
+		NotificationType type = NotificationType.is(notificationType);
+		return getSettings().userHasSubscribedToNotificationType(type);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,4 +35,8 @@ public class Utils {
 	public static ActivityManager getActivityManager() {
 	    return getService(ActivityManager.class);
 	  }
+	
+	public static MobileNotificationSettings getSettings() {
+		return getService(MobileNotificationSettings.class);
+	}
 }

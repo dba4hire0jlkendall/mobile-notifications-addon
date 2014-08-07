@@ -1,1 +1,38 @@
-<h1>Hello Juzu !</h1>
+#{param name=notificationTypes/}
+#{param name=checkboxes/}
+
+<div id="mobileNotificationsUserSettings" class="form-horizontal">
+
+	<h1>Mobile notifications settings</h1>
+	
+	<p>
+		Select which types of notifications you would like to receive on your mobile devices.
+	</p>
+
+	<table class="uiGrid table table-striped">
+		<thead>
+			<tr>
+				<th class="left">Event</th>
+				<th width="200px" class="left">Receive mobile notification</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+			for(def type : notificationTypes)
+			{
+				String typeName = type.toString();
+				int typeId = type.thisType();
+			%>
+			<tr>
+				<td class="left">${typeName}</td>
+				<td class="center">${checkboxes.get(typeId)}</td>
+			</tr>
+			<%
+			}
+			%>
+		</tbody>
+	</table>
+	
+	<div id="savingStatus" class="pull-right alert alert-success">Saved.</div>
+
+</div>

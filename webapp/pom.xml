@@ -32,7 +32,15 @@
   <packaging>war</packaging>
   <name>eXo Mobile Notifications Addon - Webapp</name>
   <description>eXo Mobile Notifications Addon - A portlet or any webapp</description>
+  <build>
+    <finalName>mobile-notifications-extension</finalName>
+  </build>
   <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>commons-juzu</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
@@ -52,6 +60,12 @@
       <groupId>org.juzu</groupId>
       <artifactId>juzu-bom-core</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.addons.mobile.notifications</groupId>
+      <artifactId>mobile-notifications-addon-lib</artifactId>
+      <scope>provided</scope>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

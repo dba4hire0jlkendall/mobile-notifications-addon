@@ -32,7 +32,7 @@ http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
      <description xml:lang="EN">User mobile notifications settings portlet</description>
      <portlet-name>UserSettingsPortlet</portlet-name>
      <display-name xml:lang="EN">User Mobile Notifications Settings</display-name>
-     <portlet-class>org.exoplatform.mobile.notifications.portlet.usersettings.UsersettingsPortlet</portlet-class>
+     <portlet-class>org.exoplatform.mobile.notifications.portlet.usersettings.UserSettingsPortlet</portlet-class>
           
      <supports>
        <mime-type>text/html</mime-type>
@@ -42,7 +42,7 @@ http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
      <!-- <resource-bundle>locale.portlet.notification.UserNotificationPortlet</resource-bundle> -->
      <portlet-info>
        <title>User mobile notifications settings</title>
-       <keywords>Mobile</keywords>
+       <keywords>mobile</keywords>
      </portlet-info>
      
    </portlet>

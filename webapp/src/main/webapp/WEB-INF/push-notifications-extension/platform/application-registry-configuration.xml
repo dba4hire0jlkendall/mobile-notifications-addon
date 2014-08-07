@@ -20,15 +20,13 @@
 
 -->
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd http://www.exoplaform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
-  <component>
-    <key>org.exoplatform.application.registry.ApplicationRegistryService</key>
-    <type>org.exoplatform.application.registry.impl.ApplicationRegistryServiceImpl</type>
-    <component-plugins>
+  <external-component-plugins>
+    <target-component>org.exoplatform.application.registry.ApplicationRegistryService</target-component>
       <component-plugin>
-        <name>new.portal.portlets.registry</name>
+        <name>mobile.notifications.apps</name>
         <set-method>initListener</set-method>
         <type>org.exoplatform.application.registry.ApplicationCategoriesPlugins</type>
-        <description>this listener init the portlets are registered in PortletRegister</description>
+        <description>This listener init the Mobile Notifications portlets</description>
         <init-params>
           <object-param>
             <name>mobile</name>
@@ -48,10 +46,10 @@
                     <object type="org.exoplatform.application.registry.Application">
                       <field name="applicationName"><string>UserSettingsPortlet</string></field>
                       <field name="categoryName"><string>mobile</string></field>
-                      <field name="displayName"><string>Mobile Notifications User Settings</string></field>
-                      <field name="description"><string>An application where users can choose which notifications will be sent to their mobile(s)</string></field>
+                      <field name="displayName"><string>Mobile Notifications Settings</string></field>
+                      <field name="description"><string>An application where users can choose which mobile notifications they receive.</string></field>
                       <field name="type"><string>portlet</string></field>
-                      <field name="contentId"><string>mobile-notifications/UserSettingsPortlet</string></field>
+                      <field name="contentId"><string>mobile-notifications-extension/UserSettingsPortlet</string></field>
                       <field name="accessPermissions">
                         <collection type="java.util.ArrayList" item-type="java.lang.String">
                           <value><string>*:/platform/users</string></value>
@@ -65,6 +63,5 @@
           </object-param>
         </init-params>
       </component-plugin>
-    </component-plugins>
-  </component>
+   </external-component-plugins>
 </configuration>

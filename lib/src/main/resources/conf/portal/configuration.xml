@@ -24,4 +24,8 @@
     <component>
         <type>org.exoplatform.mobile.notifications.provider.ApplePushNotificationProvider</type>
     </component>
+    
+    <component>
+        <type>org.exoplatform.mobile.notifications.settings.MobileNotificationSettings</type>
+    </component>
 </configuration>

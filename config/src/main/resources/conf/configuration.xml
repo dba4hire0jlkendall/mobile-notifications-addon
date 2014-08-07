@@ -48,7 +48,7 @@
                   <field name="dependencies">
                      <collection type="java.util.ArrayList">
                         <value>
-                           <string>push-notifications-extension</string>
+                           <string>mobile-notifications-extension</string>
                         </value>
                      </collection>
                   </field>
