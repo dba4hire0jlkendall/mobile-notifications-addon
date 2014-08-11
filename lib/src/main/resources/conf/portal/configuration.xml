@@ -19,10 +19,22 @@
     
     <component>
         <type>org.exoplatform.mobile.notifications.provider.GoogleCloudMessagingProvider</type>
+        <init-params>
+          <value-param>
+            <name>exo.mobile.notifications.properties.file</name>
+            <value>${exo.mobile.notifications.properties.file}</value>
+          </value-param>
+        </init-params>
     </component>
     
     <component>
         <type>org.exoplatform.mobile.notifications.provider.ApplePushNotificationProvider</type>
+        <init-params>
+          <value-param>
+            <name>exo.mobile.notifications.properties.file</name>
+            <value>${exo.mobile.notifications.properties.file}</value>
+          </value-param>
+        </init-params>
     </component>
     
     <component>

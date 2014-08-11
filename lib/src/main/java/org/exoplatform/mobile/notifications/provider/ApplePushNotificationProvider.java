@@ -6,10 +6,14 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Properties;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.mobile.notifications.model.MobileNotification;
+import org.exoplatform.mobile.notifications.utils.Utils;
 
 import com.relayrides.pushy.apns.ApnsEnvironment;
 import com.relayrides.pushy.apns.ExpiredToken;
@@ -27,26 +31,36 @@ public class ApplePushNotificationProvider implements MobileNotificationProvider
                                                       RejectedNotificationListener<SimpleApnsPushNotification>,
                                                       FailedConnectionListener<SimpleApnsPushNotification>
 {
-
 	private PushManager<SimpleApnsPushNotification> pushManager = null;
+	private final String CERTIFICATE_FILE_PATH = "exo.mobile.apn.certificate.path";
+	private final String CERTIFICATE_PASSWORD  = "exo.mobile.apn.certificate.password";
+	private String pathToCertificate;
+	private String certificatePassword;
 	
-	public ApplePushNotificationProvider() {
-		initProvider();
+	public ApplePushNotificationProvider(InitParams params) {
+		ValueParam param = params.getValueParam(Utils.MOBILE_NOTIFICATION_PROPERTIES_KEY);
+		if (param != null) {
+			String pathToMobileProperties = param.getValue();
+			Properties mobileProperties = Utils.loadMobileProperties(pathToMobileProperties);
+			pathToCertificate = mobileProperties.getProperty(CERTIFICATE_FILE_PATH);
+			certificatePassword = mobileProperties.getProperty(CERTIFICATE_PASSWORD);
+			initProvider();
+		}
 	}
 	
 	private void initProvider() {
-		createPushManager("/Users/philippeexo/Work/eXo/Push-Notifications-POC/APNs/PushNotificationsCertificates.p12", "amanaplanacanalpanama");
+		createPushManager();
 		registerErrorListeners();
 	}
 	
-	public void createPushManager(String pathToCertificate, String password)
+	public void createPushManager()
 	{
 		PushManagerFactory<SimpleApnsPushNotification> pushManagerFactory = null;
 		
 		try {
 			pushManagerFactory = new PushManagerFactory<SimpleApnsPushNotification>(
 			        ApnsEnvironment.getSandboxEnvironment(),
-			        PushManagerFactory.createDefaultSSLContext(pathToCertificate, password));
+			        PushManagerFactory.createDefaultSSLContext(pathToCertificate, certificatePassword));
 			
 			pushManager = pushManagerFactory.buildPushManager();
 			pushManager.start();
@@ -76,23 +90,23 @@ public class ApplePushNotificationProvider implements MobileNotificationProvider
 	
 	@Override
 	public void sendNotificationTo(MobileNotification notif, String to) {
-
-		final byte[] token = TokenUtil.tokenStringToByteArray(to);
-		final ApnsPayloadBuilder payloadBuilder = new ApnsPayloadBuilder();
-//		payloadBuilder.setAlertBody(notif.eventTitle);
-		 payloadBuilder.addCustomProperty("user", notif.targetUser);
-		 payloadBuilder.addCustomProperty("title", notif.eventTitle);
-		 payloadBuilder.addCustomProperty("message", notif.eventMessage);
-		 payloadBuilder.setContentAvailable(true);
-		
-		final String payload = payloadBuilder.buildWithDefaultMaximumLength();
-
-		try {
-			pushManager.getQueue().put(new SimpleApnsPushNotification(token, payload));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (pushManager != null) {
+			final byte[] token = TokenUtil.tokenStringToByteArray(to);
+			final ApnsPayloadBuilder payloadBuilder = new ApnsPayloadBuilder();
+	//		payloadBuilder.setAlertBody(notif.eventTitle);
+			 payloadBuilder.addCustomProperty("user", notif.targetUser);
+			 payloadBuilder.addCustomProperty("title", notif.eventTitle);
+			 payloadBuilder.addCustomProperty("message", notif.eventMessage);
+			 payloadBuilder.setContentAvailable(true);
+			
+			final String payload = payloadBuilder.buildWithDefaultMaximumLength();
+	
+			try {
+				pushManager.getQueue().put(new SimpleApnsPushNotification(token, payload));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	@Override

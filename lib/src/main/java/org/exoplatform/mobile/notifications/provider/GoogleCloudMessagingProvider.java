@@ -1,7 +1,5 @@
 package org.exoplatform.mobile.notifications.provider;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -14,25 +12,27 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.mobile.notifications.model.MobileNotification;
+import org.exoplatform.mobile.notifications.utils.Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GoogleCloudMessagingProvider implements MobileNotificationProvider {
 	
+	private final String PROP_API_KEY = "exo.mobile.gcm.api.key";
 	private String API_KEY = "";
 	
 	private final String GCM_URL = "https://android.googleapis.com/gcm/send";
 
-	public GoogleCloudMessagingProvider() {
-		
-		initProvider();
-	}
-	
-	private void initProvider() {
-		Properties params = loadPropertiesFromFileAtPath("/Users/philippeexo/Work/eXo/Push-Notifications-POC/GCM/poc-infos.properties");
-		API_KEY = params.getProperty("poc.project.apikey");
+	public GoogleCloudMessagingProvider(InitParams params) {
+		ValueParam param = params.getValueParam(Utils.MOBILE_NOTIFICATION_PROPERTIES_KEY);
+		if (param != null) {
+			Properties prop = Utils.loadMobileProperties(param.getValue());
+			API_KEY = prop.getProperty(PROP_API_KEY);
+		}
 	}
 	
 	private HttpPost createRequestToSendNotification(MobileNotification notif, String recipient)
@@ -86,8 +86,6 @@ public class GoogleCloudMessagingProvider implements MobileNotificationProvider 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-
 	}
 
 	@Override
@@ -95,19 +93,4 @@ public class GoogleCloudMessagingProvider implements MobileNotificationProvider 
 
 
 	}
-	
-	private Properties loadPropertiesFromFileAtPath(String path)
-	{
-			Properties prop = new Properties();
-			try {
-				prop.load(new FileInputStream(path));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			return prop;
-	}
-
 }
