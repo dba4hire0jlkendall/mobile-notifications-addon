@@ -37,14 +37,15 @@
 				<include>${project.groupId}:mobile-notifications-addon-webapp:war</include>
 			</includes>
 			<scope>provided</scope>
-			<outputFileNameMapping>mobile-notifications-addon-webapp.war</outputFileNameMapping>
+			<outputFileNameMapping>mobile-notifications-extension.war</outputFileNameMapping>
 		</dependencySet>
 		<!-- Libraries -->
 		<dependencySet>
 			<useProjectArtifact>false</useProjectArtifact>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>${project.groupId}:*:jar</include>
+				<include>*:*:jar</include>
+				<!-- <include>com.relayrides:pushy:jar</include> -->
 			</includes>
 			<scope>provided</scope>
 			<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${artifact.extension}</outputFileNameMapping>

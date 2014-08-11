@@ -44,6 +44,16 @@
       <artifactId>mobile-notifications-addon-lib</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
+      <exclusions>
+          <exclusion>
+              <artifactId>slf4j-api</artifactId>
+              <groupId>org.slf4j</groupId>
+          </exclusion>
+          <exclusion>
+              <artifactId>json-simple</artifactId>
+              <groupId>com.googlecode.json-simple</groupId>
+          </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

@@ -62,7 +62,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.addons.mobile.notifications</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mobile-notifications-addon-lib</artifactId>
       <scope>provided</scope>
       <version>${project.version}</version>
