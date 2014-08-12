@@ -40,17 +40,12 @@ public class ApplePushNotificationProvider implements MobileNotificationProvider
 	public ApplePushNotificationProvider(InitParams params) {
 		ValueParam param = params.getValueParam(Utils.MOBILE_NOTIFICATION_PROPERTIES_KEY);
 		if (param != null) {
-			String pathToMobileProperties = param.getValue();
-			Properties mobileProperties = Utils.loadMobileProperties(pathToMobileProperties);
+			Properties mobileProperties = Utils.loadMobileProperties(param.getValue());
 			pathToCertificate = mobileProperties.getProperty(CERTIFICATE_FILE_PATH);
 			certificatePassword = mobileProperties.getProperty(CERTIFICATE_PASSWORD);
-			initProvider();
+			createPushManager();
+			registerErrorListeners();
 		}
-	}
-	
-	private void initProvider() {
-		createPushManager();
-		registerErrorListeners();
 	}
 	
 	public void createPushManager()
