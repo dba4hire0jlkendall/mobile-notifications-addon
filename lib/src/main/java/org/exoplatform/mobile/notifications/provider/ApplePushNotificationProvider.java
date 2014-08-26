@@ -54,7 +54,7 @@ public class ApplePushNotificationProvider implements MobileNotificationProvider
 		
 		try {
 			pushManagerFactory = new PushManagerFactory<SimpleApnsPushNotification>(
-			        ApnsEnvironment.getSandboxEnvironment(),
+			        ApnsEnvironment.getProductionEnvironment(),
 			        PushManagerFactory.createDefaultSSLContext(pathToCertificate, certificatePassword));
 			
 			pushManager = pushManagerFactory.buildPushManager();
